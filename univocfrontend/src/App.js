@@ -6,6 +6,7 @@ import About from './Components/About/About';
 import Benefits from './Components/Benifit/Benifits';
 import JobsandRoles from './Components/JobsAndRoles/JobsandRoles';
 import Form from './Components/Form/Form';
+import Footer from './Components/Footer/Footer';
 
 const App = () => {
   const benefitsData = [
@@ -53,6 +54,7 @@ const App = () => {
       <Benefits benefits={benefitsData} />
       <JobsandRoles />
       <Form />
+      <Footer />
     </div>
   )
 }

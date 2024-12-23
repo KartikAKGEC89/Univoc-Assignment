@@ -95,7 +95,7 @@ const About = () => {
             </button>
             <div className="space-y-4">
               {programDetails.map((detail, index) => (
-                <div className="flex justify-between items-center border-b border-gray-200 py-2">
+                <div className="flex justify-between items-center border-b border-gray-200 py-2" key={index}>
   <span className="flex items-center text-sm sm:text-base text-gray-700 font-medium">
     {detail.label}
   </span>
