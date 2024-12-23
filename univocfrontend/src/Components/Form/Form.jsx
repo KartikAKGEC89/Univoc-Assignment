@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import contactBg from '../../Assets/contactbg.png';
+import contactBg from "../../Assets/contactbg.png";
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +11,7 @@ const Form = () => {
     school: "",
     message: "",
   });
+
   const [error, setError] = useState({
     fullName: "",
     email: "",
@@ -20,6 +21,9 @@ const Form = () => {
     school: "",
     message: "",
   });
+
+  const [successMessage, setSuccessMessage] = useState("");
+  const [submitError, setSubmitError] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -46,62 +50,35 @@ const Form = () => {
   const validate = (name, value) => {
     switch (name) {
       case "fullName":
-        if (!value) {
-          return "Full name is required";
-        } else {
-          return "";
-        }
+        return !value ? "Full name is required" : "";
       case "email":
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!value) {
-          return "Email is required";
-        } else if (!emailRegex.test(value)) {
-          return "Invalid email address";
-        } else {
-          return "";
-        }
+        return !value
+          ? "Email is required"
+          : !emailRegex.test(value)
+          ? "Invalid email address"
+          : "";
       case "phone":
-        if (!value) {
-          return "Phone number is required";
-        } else {
-          return "";
-        }
+        return !value ? "Phone number is required" : "";
       case "state":
-        if (!value) {
-          return "State is required";
-        } else {
-          return "";
-        }
+        return !value ? "State is required" : "";
       case "city":
-        if (!value) {
-          return "City is required";
-        } else {
-          return "";
-        }
+        return !value ? "City is required" : "";
       case "school":
-        if (!value) {
-          return "School is required";
-        } else {
-          return "";
-        }
+        return !value ? "School is required" : "";
       case "message":
-        if (!value) {
-          return "Message is required";
-        } else {
-          return "";
-        }
+        return !value ? "Message is required" : "";
       default:
         return "";
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const formErrors = Object.keys(formData).reduce((acc, key) => {
       const error = validate(key, formData[key]);
-      if (error) {
-        acc[key] = error;
-      }
+      if (error) acc[key] = error;
       return acc;
     }, {});
 
@@ -110,17 +87,41 @@ const Form = () => {
       return;
     }
 
-    console.log(formData);
+    try {
+      const response = await fetch("https://univoc-assignment.onrender.com/univoc/feedback", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.fullName,
+          email: formData.email,
+          phnumber: formData.phone,
+          state: formData.state,
+          city: formData.city,
+          school: formData.school,
+          message: formData.message,
+        }),
+      });
 
-    setFormData({
-      fullName: "",
-      email: "",
-      phone: "",
-      state: "",
-      city: "",
-      school: "",
-      message: "",
-    });
+      if (response.ok) {
+        setSuccessMessage("Your feedback has been submitted successfully!");
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+          state: "",
+          city: "",
+          school: "",
+          message: "",
+        });
+        setSubmitError("");
+      } else {
+        throw new Error("Failed to submit feedback. Please try again later.");
+      }
+    } catch (error) {
+      setSubmitError(error.message);
+    }
   };
 
   return (
@@ -137,27 +138,11 @@ const Form = () => {
 
           <div className="space-y-4 text-lg">
             <div className="flex items-center gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="h-5 w-5"
-              >
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"></path>
-              </svg>
               <a href="mailto:Hrd@Theunivoc.Com" className="hover:underline text-gray-200">
                 Hrd@Theunivoc.Com
               </a>
             </div>
             <div className="flex items-center gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="h-5 w-5"
-              >
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"></path>
-              </svg>
               <a href="tel:+918448373884" className="hover:underline text-gray-200">
                 +91 84483 73884
               </a>
@@ -178,6 +163,7 @@ const Form = () => {
               />
             </div>
             {error.fullName && <p className="text-red-500 text-sm">{error.fullName}</p>}
+
             <div>
               <input
                 id="email"
@@ -214,7 +200,6 @@ const Form = () => {
                   className="w-full p-2 border border-gray-300 rounded-md text-sm"
                 />
               </div>
-              {error.state && <p className="text-red-500 text-sm">{error.state}</p>}
               <div>
                 <input
                   id="city"
@@ -225,8 +210,9 @@ const Form = () => {
                   className="w-full p-2 border border-gray-300 rounded-md text-sm"
                 />
               </div>
-              {error.city && <p className="text-red-500 text-sm">{error.city}</p>}
             </div>
+            {error.state && <p className="text-red-500 text-sm">{error.state}</p>}
+            {error.city && <p className="text-red-500 text-sm">{error.city}</p>}
 
             <div>
               <select
@@ -253,6 +239,9 @@ const Form = () => {
               />
             </div>
             {error.message && <p className="text-red-500 text-sm">{error.message}</p>}
+
+            {successMessage && <p className="text-green-500 text-sm">{successMessage}</p>}
+            {submitError && <p className="text-red-500 text-sm">{submitError}</p>}
 
             <button
               type="submit"
