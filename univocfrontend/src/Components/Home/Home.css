@@ -1,0 +1,237 @@
+.MainHome {
+  background-color: #dde8ff;
+  padding: 50px;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.Home {
+  border: #447cf4 solid 2px;
+  border-radius: 20px 20px 100px 100px;
+}
+
+.Navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.Logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.ExploreDropdown {
+  position: relative;
+}
+
+.ExploreButton {
+  background: white;
+  border: 1px solid #447cf4;
+  border-radius: 50px;
+  padding: 10px;
+  font-size: 1.2rem;
+  color: #447cf4;
+  cursor: pointer;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.ExploreButton::after {
+  content: '\f107'; 
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  margin-left: 8px;
+  color: black;
+}
+
+.DropdownContent {
+  display: none;
+  position: absolute;
+  background: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-top: 5px;
+  z-index: 10;
+}
+
+.ExploreDropdown:hover .DropdownContent {
+  display: block;
+}
+
+.DropdownContent a {
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+  font-size: 1rem;
+}
+
+.DropdownContent a:hover {
+  background-color: #dde8ff;
+}
+
+.SearchBar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-grow: 1;
+}
+
+.SearchBar input {
+  padding: 12px 20px 12px 40px; 
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+.SearchBar input::before {
+  content: '\f002'; 
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: black;
+}
+
+.AuthButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.SigninButton,
+.RegisterButton {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.SigninButton {
+  background-color: #fff;
+  color: black;
+  border: 1px solid #447cf4;
+}
+
+.RegisterButton {
+  background-color: #447cf4;
+  color: white;
+}
+
+.Room {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-image: url('../../Assets/Background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 0px 0px 100px 100px;
+  flex-wrap: wrap;
+}
+
+.Room div {
+  width: 50%; 
+  box-sizing: border-box;
+}
+
+.Test {
+  text-align: center;
+  justify-content: center;
+}
+
+.Room p{
+  color: white;
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.Room h2 {
+  color: white;
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.Room hr {
+  border: 1px solid white;
+  text-align: center;
+  justify-content: center;
+}
+
+.Room img {
+  width: 100%;
+  max-width: 800px;
+  object-fit: cover;
+  border-radius: 0px 0px 100px 0px !important;
+}
+
+.Rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 37%;
+}
+
+.Rating .star {
+  color: gold;
+  font-size: 24px;
+}
+
+.Rating .white-star {
+  color: white;
+  font-size: 24px;
+}
+
+.Rating .rating-text {
+  color: white;
+  font-size: 1.2rem;
+  margin-left: 5px;
+}
+
+@media (max-width: 768px) {
+  .Navbar {
+    flex-direction: column;
+  }
+
+  .Logo {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .ExploreButton {
+    font-size: 1.1rem;
+  }
+
+  .SearchBar input {
+    max-width: 100%;
+  }
+
+  .Room {
+    flex-direction: column;
+  }
+
+  .Room div {
+    width: 100%;
+  }
+
+  .Room img {
+    max-width: 100%;
+  }
+
+  .Room p, .Room h2, .Rating {
+    font-size: 1.4rem;
+  }
+}
