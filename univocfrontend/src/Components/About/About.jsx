@@ -81,7 +81,7 @@ const About = () => {
           </div>
         </div>
 
-        <div className="lg:w-[35%] w-full bg-white rounded-xl shadow-lg overflow-hidden flex flex-col items-center">
+        <div className="lg:w-[40%] w-full bg-white rounded-xl shadow-lg overflow-hidden flex flex-col items-center">
           <div className="flex justify-center items-center w-full">
             <img
               src={AboutImg}

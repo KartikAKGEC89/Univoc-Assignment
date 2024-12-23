@@ -37,7 +37,7 @@ const relatedCourses = [
 
 const JobsandRoles = () => {
   return (
-    <section className="mb-12 grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
+    <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
       <div>
         <h2 className="text-5xl font-medium mb-6 border-b-2 border-b-gray-500 p-2">
           Job Roles

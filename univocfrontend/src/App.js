@@ -5,6 +5,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import About from './Components/About/About';
 import Benefits from './Components/Benifit/Benifits';
 import JobsandRoles from './Components/JobsAndRoles/JobsandRoles';
+import Form from './Components/Form/Form';
 
 const App = () => {
   const benefitsData = [
@@ -51,6 +52,7 @@ const App = () => {
       <About />
       <Benefits benefits={benefitsData} />
       <JobsandRoles />
+      <Form />
     </div>
   )
 }
