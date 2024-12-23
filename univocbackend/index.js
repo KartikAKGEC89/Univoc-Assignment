@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
-// const messageroute = require('./Routes/message')
+const messageroute = require('./messageroute');
 const cors = require('cors')
 
 
@@ -14,6 +14,6 @@ mongoose.connect("mongodb+srv://Registration:2111087@cluster0.wexksa1.mongodb.ne
 
 app.use(express.json());
   
-// app.use('/cloud', messageroute)
+app.use('/univoc', messageroute)
 
 app.listen(3000, () => console.log("Running"));
